@@ -2,7 +2,7 @@
 """
 Dependendo da língua configurada no ambiente, o programa exibe a mensagem correspondente.
 Obs: necessário criar um ambiente virtual (python -m venv venv), para rodar em qualquer máquina.
-Para ativar o ambiente virtual: .\venv\Scripts\Activate
+Para ativar o ambiente virtual: venv\Scripts\Activate.ps1
 
 
 Como usar:
