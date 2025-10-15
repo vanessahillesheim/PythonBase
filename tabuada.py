@@ -25,5 +25,5 @@ for n in numeros:
     for numero in numeros:
         resultado = n * numero
         print(f"{n} x {numero} = {resultado}")
-    print("-----------------")
+    print("-"*15)
 

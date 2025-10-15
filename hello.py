@@ -1,4 +1,4 @@
-#!usr/binn/env python3
+#!usr/bin/env python3
 """
 Dependendo da língua configurada no ambiente, o programa exibe a mensagem correspondente.
 Obs: necessário criar um ambiente virtual (python -m venv venv), para rodar em qualquer máquina.
