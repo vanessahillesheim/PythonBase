@@ -1,17 +1,35 @@
 #!/usr/bin/env python3
+
+""" Depois de instalar pacotes, salve as dependências:
+pip freeze > requirements.txt
+git add requirements.txt
+git commit -m "Update requirements"
+git push#!/usr/bin/env python3
+print("Hello world!")
 """
-Dependendo da língua configurada no ambiente o programa exibe a mensagem correspondente.
+#para transformar tudo em maiúsculo
+print('vanessa'.upper())
+
+#para transformar somente a 1ª letra maiúscula
+print('vanessa'.capitalize())
+
+""" Comentário multi linhas
+Documentação do código
+Hello World Multi Línguas.
+
+Dependendo da língua configurada no ambiente, o programa exibe a mensagem 
+correspondente.
 
 Como usar:
-Tenha a variável LANG devidamente configurada 
+Tenha a variável LANG devidamente configurada,
+Exemplo:
     export LANG=pt_BR
 
-Ou informe através do CLI argument '--lang'
-
-Ou o usuário terá que digitar no input.
-
+Execução:
+    python3 hello.py
+    ou
+    ./hello.py
 """
-
 __version__ = "0.0.1"
 __author__ = "Vanessa Hillesheim"
 __license__ = "Unlicense"
@@ -20,56 +38,49 @@ __license__ = "Unlicense"
 #Dunder version  = __version__
 
 import os
-#alterando o arquivo Hello.py, para não precisar alterar a linguagem no terminal=variável de ambiente
-import sys
-#com logging
-import logging
 
-log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
-log = logging.Logger("Vanessa", log_level)
-ch = logging.StreamHandler()
-ch.setLevel(log_level)
-fmt = logging.Formatter(
-    '%(asctime)s %(name)s %(levelname)s l:%(lineno)d f:%(filename)s: %(message)s'
-)
-ch.setFormatter(fmt)
-log.addHandler(ch)
+current_language = os.getenv("LANG", "en_US")[:5]
+print(f"LANG detectada: {current_language}")
 
+"""
+#para alterar a língua, no terminal: 
+# Testar com Português
+export LANG=pt_BR.UTF-8
+python3 hello.py
 
-arguments = {
-    "lang": None,
-    "count": 1,
-}
-for arg in sys.argv[1:]:
-    try:
-        key, value = arg.split("=")
-    except ValueError as e:
-       log.error(
-           "Você precisa ditigar '=', você usou %s, tente --key=value: %s", 
-           arg, 
-           str(e)
-       )
-       sys.exit()
+# Testar com Espanhol
+export LANG=es_ES.UTF-8
+python3 hello.py
 
-    key = key.lstrip("-").strip()
-    value = value.strip()
+# Testar com Italiano
+export LANG=it_IT.UTF-8
+python3 hello.py
 
-#validação
-    if key not in arguments:
-        print(f"Invalid Option '{key}'")
-        sys.exit()
-    arguments[key] = value
+# Testar com Francês
+export LANG=fr_FR.UTF-8
+python3 hello.py
 
-current_language = arguments["lang"]
-if current_language is None:
-    current_language = os.getenv("LANG")
-    if current_language is None:
-        current_language = input("Escolha a linguagem:")
+# Voltar para Inglês
+export LANG=en_US.UTF-8
+python3 hello.py
+"""
 
+#Ordem de complexidade O(n) = de acordo com a quantidade de testes (neste caso 5 líguas)
+msg = "Hello, world!"
+if current_language == "pt_BR":
+    msg = "Olá, Mundo!"
+elif current_language == "it_IT":
+    msg = "Cia, Mondo!"
+elif current_language == "es_SP":
+    msg = "Hola, Mundo!"
+elif current_language == "fr_FR":
+    msg = "Bonjour Monde!"
 
-#fazendo o fatiamento
-current_language = current_language[:5]
+print(msg)
 
+#Ordem de complexidade O(1) = sets (Hash table) deixa mais rápido, velocidade constante
+import os
+current_language = os.getenv("LANG", "en_US")[:5]
 msg = {
     "en_US": "Hello, world!", 
     "pt_BR": "Olá, Mundo!", 
@@ -77,18 +88,4 @@ msg = {
     "es_SP": "Hola, Mundo!", 
     "fr_FR":"Bonjour Monde!",
 }
-
-#para alterar a linguagem, no terminal devo digitar:
-#python hello.py --lang=fr_FR
-
-#EAFP
-try:
-    message = msg[current_language]
-except KeyError as e:
-    print(f"[ERROR] {str(e)}")
-    print(f"Linguagem é invalida (não está nos 5 idiomas do dicionário). Escola um dos idiomas: {list(msg.keys())}")
-    sys.exit(1)
-
-print(
-    message * int(arguments["count"])
-)
+print(msg[current_language])
