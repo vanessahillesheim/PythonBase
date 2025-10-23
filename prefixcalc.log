@@ -1,0 +1,4 @@
+sum, 5, 3 = 8div, 10, 2 = 5.0
+<built-in method isoformat of datetime.datetime object at 0x000001C9764CA0A0>, mul, 5, 16554 = 82770
+<built-in method isoformat of datetime.datetime object at 0x0000029E4C6DA2E0> - anonymous - sub, 10, 15 = -5
+2025-10-23T17:08:12.408337 - anonymous - sum, 10, 5 = 15

@@ -15,8 +15,12 @@ Funcionamento:
 Uso:
 $ prefixcalc.py sum 5 2 7
 $ prefixcalc.py mul 10 5 50
+os resultados serão salvos em prefixcalc.log
+
+->para executar o arquivo no ípython: python prefixcalc.py
+
 """
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "Vanessa Hillesheim"
 
 
@@ -41,6 +45,11 @@ except ZeroDivisionError:
 """
 
 import sys
+import os
+
+#para gravar a data e local do login
+from datetime import datetime
+
 argumentos = sys.argv[1:]
 
 if not argumentos:
@@ -83,8 +92,20 @@ try:
         resultado = n1 * n2
     elif operacao == "div":
         resultado = n1 / n2
+
+#para gravar o histórico das execuções no arquivo preficalc.log com usuario/dia/hora
+    path = os.curdir
+    filepath = os.path.join(path, "prefixcalc.log")
+    timestamp = datetime.now().isoformat()
+    usuario = os.getenv('USER', 'anonymous')
+
+
+    with open(filepath, "a") as file_:
+        file_.write(f"{timestamp} - {usuario} - {operacao}, {n1}, {n2} = {resultado}\n")
     
     print(f"O resultado é {resultado:.2f}")
+
 except ZeroDivisionError:
     print("Erro: Divisão por zero!")
-
+except Exception as e:
+    print(f"Erro inesperado: {e}")
