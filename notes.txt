@@ -1,0 +1,2 @@
+minha 1ª nota	Testando	1ª nota do arquivo teacher
+minha 2ª nota	2ª nota teste	essa é a 2ª nota
