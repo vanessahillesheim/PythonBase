@@ -81,7 +81,17 @@ msg = {
 #para alterar a linguagem, no terminal devo digitar:
 #python hello_sys.py --lang=it_IT 
 
-#EAFP
+"""
+LBYL - Look before You Leap = Olhe antes de pular
+if current_language in msg:
+    message = mesg[current_language]
+else:
+    print(f"Language is invalid. Chosse from: {list(msg.keys())}")
+    sys.exit(1)
+"""
+
+
+#EAFP = Mais fácil pedir desculpas que permissão
 try:
     message = msg[current_language]
 except KeyError as e:

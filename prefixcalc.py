@@ -82,11 +82,17 @@ for num in nums:
         num = int(num)
     valida_nums.append(num)
 
-n1, n2 = valida_nums
+#vetifica se há 3 argumentos= 3 valores
+try:
+    n1, n2 = valida_nums
+except ValueError as e:
+    print(str(e))
+    sys.exit(1)
+
 try:
     if operacao == "sum":
         resultado = n1 + n2
-    elif operacao == "sub":
+    elif operacao == "sub": 
         resultado = n1 - n2
     elif operacao == "mul":
         resultado = n1 * n2
@@ -99,11 +105,14 @@ try:
     timestamp = datetime.now().isoformat()
     usuario = os.getenv('USER', 'anonymous')
 
-
-    with open(filepath, "a") as file_:
-        file_.write(f"{timestamp} - {usuario} - {operacao}, {n1}, {n2} = {resultado}\n")
-    
     print(f"O resultado é {resultado:.2f}")
+
+    try:
+        with open(filepath, "a") as file_:
+            file_.write(f"{timestamp} - {usuario} - {operacao}, {n1}, {n2} = {resultado}\n")
+    except PermissionError as e:
+        print(str(e))
+        ys.exit(1)
 
 except ZeroDivisionError:
     print("Erro: Divisão por zero!")

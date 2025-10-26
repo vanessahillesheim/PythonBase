@@ -1,0 +1,3 @@
+2025-10-26 17:18:53,917 Vanessa WARNING l:38 f:logs.py: Aviso que não causa erro.
+2025-10-26 17:18:53,917 Vanessa ERROR l:39 f:logs.py: Erro que afeta uma única execução.
+2025-10-26 17:18:53,917 Vanessa CRITICAL l:40 f:logs.py: Erro geral. Ex: BD sumiu!
