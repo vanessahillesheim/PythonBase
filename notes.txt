@@ -1,2 +1,5 @@
 minha 1ª nota	Testando	1ª nota do arquivo teacher
 minha 2ª nota	2ª nota teste	essa é a 2ª nota
+minha 5ª nota	Testando de novo	Testando com try e exception
+4ª Nota	testando	testando com loop
+3ª Nota	whilw	testando o while com break
