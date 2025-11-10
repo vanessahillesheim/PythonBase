@@ -112,7 +112,7 @@ try:
             file_.write(f"{timestamp} - {usuario} - {operacao}, {n1}, {n2} = {resultado}\n")
     except PermissionError as e:
         print(str(e))
-        ys.exit(1)
+        sys.exit(1)
 
 except ZeroDivisionError:
     print("Erro: Divisão por zero!")
