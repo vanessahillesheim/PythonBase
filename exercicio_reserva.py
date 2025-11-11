@@ -57,20 +57,51 @@ except FileNotFoundError:
 
 #Programa principal
 print("Reseras no Hotel Python da Linux Tips")
-print("-"*40)
+print("-"*52)
 
 if len(ocupados) == len(quartos):
-    print("Hotel está lotado, volte depois")
+    print("Hotel está lotado, volte depois!")
     sys.exit(0)
 
-nome_cliente = input(f"Qual é o seu nome?").strip()
-
+nome_cliente = input(f"Qual é o seu nome?" ).strip()
+print()
 print("Lista de Quartos")
-print("Número - Nome do Quarto   - Preço     - Disponível?")
+print()
+head = ["Número","Nome do Quarto", "Preço", "Disponível?"]
+print(f"{head[0]} - {head[1]:<16} - {head[2]:<9} - {head[3]:<14}")
 for num_quarto, dados_quarto in quartos.items():
     nome_quarto = dados_quarto["nome_quarto"]
     preco = dados_quarto["preco"]
     disponivel = "❌"if not dados_quarto["disponivel"] else "👍"
     print(f"{num_quarto:<6} - {nome_quarto:<16} - R${preco:<7.2f} - {disponivel}")
 
-    #parei em 53:40
+print("-"*52)
+
+#reserva
+
+try:
+    num_quarto = int(input("Qual o nº do quarto desejado?").strip())
+    if not quartos[num_quarto]["disponivel"]:
+        print(f"O quarto nº {num_quarto} está ocupado, escolha outro.")
+        sys.exit(0)
+except KeyError:
+    print(f"O quarto nº {num_quarto} não existe.")
+except KeyError:
+    print(f"Erro: digite apenas números.")
+    sys.exit(0)
+
+try:
+    dias = int(input("Quantos dias?").strip())
+except KeyError:
+    print(f"Erro: digite apenas números.")
+    sys.exit(0)
+
+nome_quarto = quartos[num_quarto]["nome_quarto"]
+preco_diaria = quartos[num_quarto]["preco"]
+total = dias * preco_diaria
+
+print(f"Olá {nome_cliente}! você escolheu o quarto nº {num_quarto} = {nome_quarto}, por {dias} dias, resultando o valor total de R${total:.2f}!")
+if input("Confirma? [y/n]").strip().lower() in ("y", "yes", "sim", "s"):
+    with open(RESERVAS_FILE, "a") as reserva_file:
+        reserva_file.write(f"{nome_cliente},{num_quarto},{dias}\n")
+
