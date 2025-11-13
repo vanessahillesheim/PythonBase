@@ -1,6 +1,6 @@
 """
-#builtin
-Funções embutidas no python: print, input, sum, open, max, min, len, reversed, sorted, filter, map, enumerate, zip
+#builtin 
+Funções embutidas (não precisam ser importadas) no python: print, input, sum, open, max, min, len, reversed, sorted, filter, map, enumerate, zip
 
 #stdlib
 Biblioteca que tem que ser importada da bliblioteca padrão
@@ -103,3 +103,54 @@ print(dict(zip(colunas, dados1)))
 
 #acessando o primeiro valor do dicionario, pela chave "nome"
 print(dict(zip(colunas, dados1))["nome"])
+
+#---------------------------------------------------------------------------------------
+#RANDOM
+#para geração de número randômico
+
+import random
+print(random.random())
+
+#para geração de número randômico inteiro, entre 1 e 11
+print(random.randint(1,11))
+
+#para fazer seleção aleatória a partir de uma coleção
+cores = ["red", "green", "blue"]
+print(random.choice(cores))
+
+#para fazer seleção aleatória de 2 elementos, a partir de uma coleção
+cores = ["red", "green", "blue"]
+print(random.sample(cores,2))
+
+#para embaralhar todos os elementos de uma coleção (mas sem alterar o objeto numbers)
+numbers = [1,2,3,4,5,6,7]
+print(random.sample(numbers,len(numbers)))
+print(numbers)
+
+#para embaralhar os elementos e ao mesmo tempo salvar essa nova posição do objeto (altera o objeto numbers) = alterção INPLACE
+numbers1 = [1,2,3,4,5,6,7]
+random.shuffle(numbers1)
+print(numbers1)
+
+#---------------------------------------------------------------------------------------
+#ITERTOOLS
+
+#Para trabalhar com objetos iteráveis
+import itertools as it
+
+#CYCLE = para repetir dados em ciclos infinitos (só para com o break)
+#usar para etiquetar itens, por exemplo
+
+for index, item in enumerate(it.cycle("ABCD")):
+    print(item, "Bruno")
+    if index>10:
+        break
+
+#REPEAT = para repetir texto
+#repetir "Bruno" 10x
+print(list(it.repeat("Bruno", 10)))
+
+#ACUMULATE = para retornar os acumuladores da soma de dados de uma coleção
+
+numbers2 = [1,2,3,4,5]
+print(list(it.accumulate(numbers2)))
