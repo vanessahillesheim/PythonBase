@@ -1,4 +1,8 @@
 """
+se der erro na execução: Ctrl+F5 ou
+& C:/Users/admin/Desktop/Tecnologia/Python/PythonBase/venv/Scripts/python.exe c:/Users/admin/Desktop/Tecnologia/Python/PythonBase/funcoes.py
+
+
 #builtin 
 Funções embutidas (não precisam ser importadas) no python: print, input, sum, open, max, min, len, reversed, sorted, filter, map, enumerate, zip
 
@@ -133,24 +137,75 @@ random.shuffle(numbers1)
 print(numbers1)
 
 #---------------------------------------------------------------------------------------
-#ITERTOOLS
+#ITERTOOLS: para manipular/gerar iteráveis
 
 #Para trabalhar com objetos iteráveis
 import itertools as it
 
-#CYCLE = para repetir dados em ciclos infinitos (só para com o break)
-#usar para etiquetar itens, por exemplo
+#CYCLE = para repetir dados em ciclos indefinidos (só para com o break)
+#usar para etiquetar itens, por exemplo (é um gerador de dados)
 
+#para iterar a palavra Bruno com as letras do objeto ABCD, até o índice 10:
 for index, item in enumerate(it.cycle("ABCD")):
     print(item, "Bruno")
     if index>10:
         break
 
 #REPEAT = para repetir texto
-#repetir "Bruno" 10x
+#repetir "Bruno" 10x = gera uma lista
 print(list(it.repeat("Bruno", 10)))
 
-#ACUMULATE = para retornar os acumuladores da soma de dados de uma coleção
-
+#ACUMULATE = para retornar os acumuladores da soma de dados de uma coleção (1+2=3, 3+3=6, 6+4=10, 10+5=15), então vai retornar: 1,3,6,10,15
 numbers2 = [1,2,3,4,5]
 print(list(it.accumulate(numbers2)))
+
+#PRODUCT = para elevar a uma potência e exibir em lista. Neste caso vamos exibir a ABC de 2 em 2: AA, AB, AC, BA, BB, BC, CA, CB, CC
+print(list(it.product("ABC",repeat=2)))
+
+#PERMUTATIONS = para fazer permutação entre os elementos de um objeto (exibe uma lista com as variações de posições dos elementos do objeto): ABC, ACB, BAC, BCA, CAB, CBA
+print(list(it.permutations("ABC")))
+
+#COMBINATIONS = para combinar elementos, sem repetição (são únicas): red green, red blue e green blue
+cores1 = ["red", "green", "blue"]
+print(list(it.combinations(cores1,2)))
+
+#---------------------------------------------------------------------------------------
+#FUNCTOOLS: funções para manipular funções
+
+import functools as ft
+
+#PARTIAL = permite manipular parcialmente uma função do python
+#Por exemplo, se quiser que imprima --- nos espaçoes entre as palavras:
+#tradicional:
+print("Vanessa", "Hillesheim", sep="---")
+
+#customizando a função print
+myprint= ft.partial(print, sep="---")
+myprint("Vanessa", "Hillesheim")
+#---------------------------------------------------------------------------------------
+
+import statistics as st
+
+numeros1 = [6,4,7,5,3,1,2]
+
+#para saber a média de numeros1
+print(st.mean(numeros1))
+
+#para saber a mediana de numeros1
+print(st.median(numeros1))
+
+#---------------------------------------------------------------------------------------
+
+import uuid
+
+#para gerar idpython com chave hash aleatória: bb68341b-b969-4d5d-8c2a-306d7957d3ec
+print(uuid.uuid4())
+
+#---------------------------------------------------------------------------------------
+import getpass
+
+#serve para ler um input silencioso (o que o usuário digita não aparece, mas é salvo no BD)
+
+first_name = input("Nome:")
+password = getpass.getpass("Senha:")
+
