@@ -22,19 +22,23 @@ No programa abaixo, "comentamos" os erros tratados e sua exibição de mensagem 
 
 import os
 import sys
+import logging
 
-try:
-    names = open("names.txt").readlines()
-except (FileNotFoundError, ZeroDivisionError) as e: #captura a mensagem de erro do FileNot Found e do ZeroDivision
-    print(f"{str(e)}.") #exibe a mensagem de erro do sistema
-    sys.exit(1)
-else: #se não tiver except=erro, roda o else
-    print("Sucesso!")
-finally: #independente de ter erro, vai executar
-    print("Execute isso sempre!")
+log = logging.Logger("erros")
 
-try:
-    print(names[2])
-except:  #Bare except
-    print("[Error] Missing name in the list.")
-    sys.exit(1)
+def try_open_file(filepath, retry=1) -> list:
+    #tente abrir o arquivo e tente novamente qtas vezes definidas no retry
+    for attempt in range(1, retry +1):
+        try:
+            return open(filepath).readlines()
+        except (FileNotFoundError, ZeroDivisionError) as e: #captura a mensagem de erro do FileNot Found e do ZeroDivision
+           log.error("Erro: %s, e")
+           time.sleep(2)
+        else: #se não tiver except=erro, roda o else
+            print("Sucesso!")
+        finally: #independente de ter erro, vai executar
+            print("Execute isso sempre!")
+    return []
+
+for line in try_open_file("names.txt", retry=5):
+    print(line)

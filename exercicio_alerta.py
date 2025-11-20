@@ -32,34 +32,35 @@ import sys
 import logging
 log = logging.Logger("alerta")
 
+def dicionario_preenchido(dicionario_inputs):
+    info_size = len(dicionario_inputs)
+    filled_size = len([value for value in dicionario_inputs.values() if value is not None])
+    return info_size == filled_size
+
+def leia_inputs_dicionario(dicionario_inputs):
+    for key in dicionario_inputs.keys():
+            if dicionario_inputs[key] is not None:
+                continue
+            try:
+                dicionario_inputs[key]= float(input(f"Qual a {key} atual?").strip())
+            except ValueError:
+                log.error("%s inválida. Digite números!", key)
+             
+#PROGRAMA PRINCIPAL
+
 info = {
     "temperatura": None, 
     "umidade": None
 }
 
-while True:
-    #condição de parada
-    info_size = len(info.values())
-    filled_size = len([value for value in info.values() if value is not None])
-      
-    if info_size == filled_size:
-        break
-
-
-    for key in info.keys():
-        if info[key] is not None:
-            continue
-        try:
-            info[key]= float(input(f"Qual a {key} atual?").strip())
-        except ValueError:
-            log.error("%s inválida. Digite números!", key)
-            break
-
+while not dicionario_preenchido(info):
+    leia_inputs_dicionario(info)  
+    
 temp, umid = info.values()
 
-if temp >45 and temp*3 >= umid:
+if temp >45:
     print(f"ALERTA! Perigo: calor extremo!")
-elif temp>= 45:
+elif temp>30 and temp *3>= umid:
     print(f"ALERTA! Perigo: calor úmido!")
 elif temp > 10 and temp <=30: 
     print(f"Normal!")
